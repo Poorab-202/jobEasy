@@ -1,7 +1,7 @@
 import { useEffect, useState, } from 'react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { JOB_API_END_POINT } from '../utils/constant'
@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 const JobDescription = () => {
 
     const params = useParams();
+    const navigate=useNavigate();
     const jobId = params.id;
     const { singleJob } = useSelector(store => store.job);
     const { user } = useSelector(store => store.auth)
@@ -38,6 +39,11 @@ const JobDescription = () => {
 
     const applyJobHandler = async () => {
         try {
+            if(!user) {
+                toast.error("please login before applying to any job!")
+                return;
+            }
+            
             const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, { withCredentials: true });
             console.log(res.data);
             if (res.data.success) {

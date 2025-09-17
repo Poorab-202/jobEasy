@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ export default function HeroSection() {
         dispatch(setSearchedQuery(query));
         navigate("/browse")
     }
+    
     return (
         <div className='text-center'>
             <div className='flex flex-col gap-5 my-10'>
@@ -23,7 +24,7 @@ export default function HeroSection() {
                     <input type='text'
                         placeholder='Find your Job'
                         className='outline-none border-none w-full'
-                        onChange={(e) => setQuery(e.target.value)}>
+                        onChange={(e) => {setQuery(e.target.value)}}>
                     </input>
                     <Button onClick={searchHandler} className="rounded-r-full bg-[#6A38C2]  hover:bg-[#522a99] cursor-pointer"><Search className='h-5 w-5 text-white'></Search></Button>
                 </div>

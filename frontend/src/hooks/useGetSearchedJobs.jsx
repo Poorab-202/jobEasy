@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { JOB_API_END_POINT } from '../utils/constant';
 import { useDispatch, useSelector } from "react-redux";
-import { setAllJobs, setSearchedJobs } from "../redux/jobSlice";
+import { setSearchedJobs } from "../redux/jobSlice";
 
 export default function useGetSearchedJobs() {
   const dispatch = useDispatch();

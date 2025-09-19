@@ -23,6 +23,7 @@ export default function HeroSection() {
                     <input type='text'
                         placeholder='Find your Job'
                         className='outline-none border-none w-full'
+                        value={query}
                         onChange={(e) => setQuery(e.target.value)}>
                     </input>
                     <Button onClick={searchHandler} className="rounded-r-full bg-[#6A38C2]  hover:bg-[#522a99] cursor-pointer"><Search className='h-5 w-5 text-white'></Search></Button>

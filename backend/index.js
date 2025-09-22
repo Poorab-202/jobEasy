@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const corsOptions = {
-    origin: ['http://localhost:5174', "https://jobeasy-frontend.onrender.com"],
+    origin: ['http://localhost:5173', 'http://localhost:5174', "https://jobeasy-frontend.onrender.com"],
     credentials: true,
     exposedHeaders: ['Authorization']
 };

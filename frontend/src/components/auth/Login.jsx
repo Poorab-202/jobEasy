@@ -40,7 +40,6 @@ export default function Login() {
         ,
         withCredentials: true
       })
-      console.log(res.data.token);
       localStorage.setItem("token", res.data.token);
 
       if (res.data.success) {
@@ -51,7 +50,6 @@ export default function Login() {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
-
     }
 
     finally {
@@ -97,7 +95,7 @@ export default function Login() {
 
           </div>
           {
-            loading ? <Button className="w-full my-3 bg-black text-white"><Loader2 className='mr-2 h-4 w-4 animate-spin'>  </Loader2> Please wait</Button> : <Button variant="outline" type="submit" className="w-full my-3 bg-black text-white hover:bg-gray-800 cursor-pointer">Login</Button>
+            loading ? <Button className="w-full my-3 bg-black text-white"><Loader2 className='mr-2 h-4 w-4 animate-spin'>  </Loader2> Please wait</Button> : <Button variant="outline" type="submit" className="w-full my-3 bg-black text-white hover:bg-neutral-700 hover:text-white cursor-pointer">Login</Button>
           }
 
 

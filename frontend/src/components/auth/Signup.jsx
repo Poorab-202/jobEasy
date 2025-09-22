@@ -128,7 +128,7 @@ export default function Signup() {
                     </div>
 
                     {
-                        loading ? <Button className="w-full my-3 bg-black text-white"><Loader2 className='mr-2 h-4 w-4 animate-spin'>  </Loader2> Please wait</Button> : <Button variant="outline" type="submit" className="w-full my-3 bg-black text-white hover:bg-gray-800 cursor-pointer">Sign up</Button>
+                        loading ? <Button className="w-full my-3 bg-black text-white"><Loader2 className='mr-2 h-4 w-4 animate-spin'>  </Loader2> Please wait</Button> : <Button variant="outline" type="submit" className="w-full my-3 bg-black text-white hover:bg-gray-800 hover:text-white cursor-pointer">Sign up</Button>
                     }
                     <span className='text-sm'>Already have an account? <Link to="/login" className="text-blue-600">login</Link></span>
                 </form>

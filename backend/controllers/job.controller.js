@@ -103,7 +103,6 @@ export const searchJobs = async (req, res) => {
     };
 
     const jobs = await Job.find(query).populate("company");
-
     return res.status(200).json({
       message: "Searched jobs fetched successfully!",
       jobs,

@@ -17,7 +17,8 @@ export default function useGetSearchedJobs() {
 
         const res = await axios.get(url, { withCredentials: true });
 
-        if (res.data.success) {
+
+        if (res.data.success) {        
           dispatch(setSearchedJobs(res.data.jobs));
         }
       } catch (error) {

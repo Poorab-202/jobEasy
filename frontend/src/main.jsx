@@ -18,5 +18,5 @@ createRoot(document.getElementById('root')).render(
       </PersistGate>
     </Provider>
     <Toaster></Toaster>
-  </StrictMode>,
+  </StrictMode>
 )

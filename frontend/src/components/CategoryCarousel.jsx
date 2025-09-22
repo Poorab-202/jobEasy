@@ -31,7 +31,7 @@ export default function CategoryCarousel() {
                 <CarouselContent>
                     {
                         category.map((cat, index) => (
-                            <CarouselItem className="lg:basis-1/3 md:basis-1/2 text-center">
+                            <CarouselItem className="lg:basis-1/3 md:basis-1/2 text-center" key={index}>
                                 <Button onClick={(e)=>searchHandler(cat)} className="bg-black text-white rounded-full">{cat}</Button>
                             </CarouselItem>
                         ))

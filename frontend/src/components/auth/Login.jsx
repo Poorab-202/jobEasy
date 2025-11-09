@@ -72,12 +72,12 @@ export default function Login() {
           <div className='flex flex-col items-center'><h1 className='font-bold text-xl mb-5'>Login</h1></div>
           <div className='my-2'>
             <Label>E-mail</Label>
-            <Input type="email" value={input.email} name="email" onChange={changeEventHandler} placeholder="abc@gmail.com" />
+            <Input type="email" value={input.email} name="email" onChange={changeEventHandler} placeholder="example@gmail.com" />
           </div>
 
           <div className='my-2'>
             <Label>Password</Label>
-            <Input type="password" value={input.password} name="password" onChange={changeEventHandler} placeholder="XXXXXXXX" />
+            <Input type="password" value={input.password} name="password" onChange={changeEventHandler}  />
           </div>
           <div className='flex items-center gap-3'>
 

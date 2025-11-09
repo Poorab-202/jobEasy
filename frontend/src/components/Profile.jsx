@@ -9,6 +9,7 @@ import ApplicationsTable from './ApplicationsTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '../hooks/useGetAppliedJobs'
+import Footer from './shared/Footer'
 
 
 
@@ -26,9 +27,9 @@ export default function Profile() {
                 <div className='flex justify-between'>
                     <div className='flex items-center gap-4 my-2'>
                         <Avatar className="h-20 w-20">
-                            <AvatarImage src={user?.profile?.profilePhoto} alt='profile'>
-
-                            </AvatarImage>
+                            {
+                                user?.profile?.profilePhoto !== "" ? <AvatarImage src={user?.profile?.profilePhoto} />
+                                    : <AvatarImage src="https://cdn-icons-png.flaticon.com/512/17593/17593730.png"></AvatarImage>}
                         </Avatar>
                         <div>
                             <h1 className='text-lg'>{user?.fullName}</h1>
@@ -58,6 +59,7 @@ export default function Profile() {
             </div>
 
             <UpdateProfileDialog open={open} setOpen={setOpen}></UpdateProfileDialog>
+            <Footer></Footer>
         </div>
     )
 }

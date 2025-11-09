@@ -54,7 +54,7 @@ export const getPostedJobs = async (req, res) => {
         if (!jobs) {
             return res.status(404).json({
                 message: "No job posted by user!",
-                success: false
+                success: true
             });
         }
 

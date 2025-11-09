@@ -92,19 +92,19 @@ export default function Signup() {
                     <div className='flex flex-col items-center'><h1 className='font-bold text-xl mb-5'>Signup</h1></div>
                     <div className='my-2'>
                         <Label>Full Name</Label>
-                        <Input type="text" value={input.fullName} name="fullName" onChange={changeEventHandler} placeholder="patel" />
+                        <Input type="text" value={input.fullName} name="fullName" onChange={changeEventHandler} placeholder="Poorab Patel" />
                     </div>
                     <div className='my-2'>
                         <Label>E-mail</Label>
-                        <Input type="email" value={input.email} name="email" onChange={changeEventHandler} placeholder="patel@gmail.com" />
+                        <Input type="email" value={input.email} name="email" onChange={changeEventHandler} placeholder="example@gmail.com" />
                     </div>
                     <div className='my-2'>
-                        <Label>PhoneNumber number</Label>
+                        <Label>Phone Number</Label>
                         <Input type="text" value={input.phoneNumber} name="phoneNumber" onChange={changeEventHandler} placeholder="8080808080" />
                     </div>
                     <div className='my-2'>
                         <Label>Password</Label>
-                        <Input type="password" value={input.password} name="password" onChange={changeEventHandler} placeholder="patel" />
+                        <Input type="password" value={input.password} name="password" onChange={changeEventHandler} />
                     </div>
                     <div className='flex items-center gap-6'>
                         <div className='flex items-center gap-1'>

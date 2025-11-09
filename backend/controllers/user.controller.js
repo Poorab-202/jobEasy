@@ -100,7 +100,7 @@ export const login = async (req, res) => {
         let user = await User.findOne({ email }); // fetch the user using the email
         if (!user) {   // check if the user exist with that mail
             return res.status(400).json({
-                message: "user doesn't exist with this E-mail! please try another E-mail ID.",
+                message: "User doesn't exist with this E-mail!",
                 success: false
             })
         }
@@ -108,14 +108,14 @@ export const login = async (req, res) => {
         const isPasswordMatched = await bcrypt.compare(password, user.password); // password verification
         if (!isPasswordMatched) {
             return res.status(400).json({
-                message: "Wrong Password!",
+                message: "Something is wrong!",
                 success: false
             })
         }
 
         if (role !== user.role) {
             return res.status(400).json({
-                message: "Role doesn't match!",
+                message: "Something is wrong!",
                 success: false
             })
         }
@@ -236,6 +236,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
 
+console.log("logout");
 
     try {
         return res.status(200).cookie("token", "", { maxAge: 0 }).json({
@@ -255,8 +256,6 @@ export const logout = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-
-
         const { fullName, email, phoneNumber, bio, skills } = req.body;
 
         const file = req.file;
@@ -264,6 +263,22 @@ export const updateProfile = async (req, res) => {
         if (file) {
             const fileUri = getDataUri(file);
             var cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        }
+        const profile = req.profilePhoto;
+        if (profile) {
+            try {
+                const fileUri = getDataUri(profile);
+                // console.log("fileUri length:", fileUri.content.length);
+                const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+                var profilePhotoUrl = cloudResponse.secure_url;
+            } catch (uploadErr) {
+                console.error("Cloudinary upload failed:", uploadErr);
+                return res.status(500).json({
+                    message: "File upload to Cloudinary failed.",
+                    success: false,
+                    error: uploadErr.message
+                });
+            }
         }
 
 
@@ -273,7 +288,6 @@ export const updateProfile = async (req, res) => {
         }
 
         const userId = req.id; // middleware authentication
-        console.log(userId);
 
         let user = await User.findById(userId)
 
@@ -291,6 +305,7 @@ export const updateProfile = async (req, res) => {
         if (phoneNumber) user.phoneNumber = phoneNumber
         if (bio) user.profile.bio = bio
         if (skills) user.profile.skills = skillsArray
+        if (profile) user.profile.profilePhoto = profilePhotoUrl
 
 
         if (cloudResponse) {

@@ -49,8 +49,8 @@ export default function AdminJobsTable() {
                                     <Popover>
                                         <PopoverTrigger><MoreHorizontal className="cursor-pointer"></MoreHorizontal> </PopoverTrigger>
                                         <PopoverContent className="w-32">
-                                            <div onClick={()=> navigate(`${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer"><Edit2 className='w-4'></Edit2><span>Edit</span></div>
-                                            <div onClick={()=> navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center gap-2 w-fit cursor-pointer"><Eye className='w-4'></Eye><span>Applicant</span></div>
+                                            {/* <div onClick={()=> navigate(`${job._id}`)} className="flex items-center gap-2 w-fit cursor-pointer"><Edit2 className='w-4'></Edit2><span>Edit</span></div> */}
+                                            <div onClick={()=> navigate(`/admin/jobs/${job._id}/applicants`)} className="flex items-center gap-2 w-fit cursor-pointer"><Eye className='w-4'></Eye><span>Applicants</span></div>
                                         </PopoverContent>
                                     </Popover>
                                 </TableCell>

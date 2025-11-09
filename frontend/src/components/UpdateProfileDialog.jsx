@@ -19,6 +19,7 @@ export default function UpdateProfileDialog({ open, setOpen }) {
         email: user?.email,
         phoneNumber: user?.phoneNumber,
         bio: user?.profile?.bio,
+        profilePhoto: user?.profile?.profilePhoto,
         skills: user?.profile?.skills?.map(skills => skills),
         file: user?.profile?.resume
     });
@@ -32,9 +33,15 @@ export default function UpdateProfileDialog({ open, setOpen }) {
         const file = e.target.files?.[0];
         setInput({ ...input, file })
     }
+    const profileChangeHandler = (e) => {
+        const profilePhoto = e.target.files?.[0];
+        setInput({ ...input, profilePhoto })
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
+
         const formData = new FormData();
         formData.append("fullName", input.fullName)
         formData.append("email", input.email)
@@ -45,6 +52,11 @@ export default function UpdateProfileDialog({ open, setOpen }) {
             formData.append("file", input.file);
 
         }
+        if (input.profilePhoto) {
+            formData.append("profilePhoto", input.profilePhoto);
+        }
+        console.log(input);
+        
         try {
             setLoading(true);
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
@@ -65,16 +77,17 @@ export default function UpdateProfileDialog({ open, setOpen }) {
                 toast.error("Something went wrong!");
             }
         }
-        finally{
+        finally {
             setLoading(false);
         }
         setOpen(false);
 
     }
 
+
     return (
         <div>
-            <Dialog open={open}>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="bg-white sm:max-w-[425px]" onInteractOutside={() => setOpen(false)}>
                     <DialogHeader>
                         <DialogTitle>Update Profile</DialogTitle>
@@ -101,9 +114,13 @@ export default function UpdateProfileDialog({ open, setOpen }) {
                                 <Label htmlFor="skills" className="text-right">Skills</Label>
                                 <Input id="skills" name="skills" value={input.skills} onChange={changeEventHandler} className="col-span-3"></Input>
                             </div>
+                            {/* <div className='grid grid-cols-4 items-center gap-4'>
+                                <Label htmlFor="skills" className="text-right">Profile</Label>
+                                <Input id="profilePhoto" name="profilePhoto" type="file" onChange={profileChangeHandler}  className="col-span-3"></Input>
+                            </div> */}
                             <div className='grid grid-cols-4 items-center gap-4'>
                                 <Label htmlFor="file" className="text-right">Resume</Label>
-                                <Input id="file" name="file" type="file"  onChange={fileChangeHandler} accept="application/pdf" className="col-span-3"></Input>
+                                <Input id="file" name="file" type="file" onChange={fileChangeHandler} accept="application/pdf" className="col-span-3"></Input>
                             </div>
                         </div>
                         <DialogFooter>

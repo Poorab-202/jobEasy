@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux'
 export default function ApplicationsTable() {
     const { allAppliedJobs } = useSelector(store => store.job);
 
+
     return (
 
         <div>
 
-            <Table>
-                <TableCaption>Jobs you applied</TableCaption>
+            <Table className="mb-10">
+                
                 <TableHeader>
                     <TableRow>
                         <TableHead>Date</TableHead>
@@ -22,7 +23,7 @@ export default function ApplicationsTable() {
                 </TableHeader>
                 <TableBody>
                     {
-                        allAppliedJobs?.length <= 0 ? <span>You haven't applied any job yet.</span> : allAppliedJobs?.map((Element, index) => (
+                        !allAppliedJobs ? <span className='font-bold '>You haven't applied any job yet.</span> : allAppliedJobs?.map((Element, index) => (
                             <TableRow key={index}>
                                 <TableCell>{Element?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell>{Element?.job?.title}</TableCell>
@@ -31,10 +32,10 @@ export default function ApplicationsTable() {
                                     <Badge
                                         variant="ghost"
                                         className={`text-white ${Element?.status === "rejected"
-                                                ? "bg-red-600"
-                                                : Element?.status === "accepted"
-                                                    ? "bg-green-600"
-                                                    : "bg-gray-500"
+                                            ? "bg-red-600"
+                                            : Element?.status === "accepted"
+                                                ? "bg-green-600"
+                                                : "bg-gray-500"
                                             }`}
                                     >
                                         {Element?.status.charAt(0).toUpperCase() + Element?.status.slice(1)}

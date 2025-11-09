@@ -1,7 +1,7 @@
 import { useEffect, useState, } from 'react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { JOB_API_END_POINT } from '../utils/constant'
@@ -10,7 +10,7 @@ import { setSingleJob } from '../redux/jobSlice';
 import { toast } from 'sonner';
 
 const JobDescription = () => {
-
+    const navigate = useNavigate();
     const params = useParams();
     const jobId = params.id;
     const { singleJob } = useSelector(store => store.job);
@@ -37,9 +37,14 @@ const JobDescription = () => {
 
 
     const applyJobHandler = async () => {
+        if (user === null) {
+            navigate("/login");
+            toast.warning("Please login before applying to jobs!")
+            return;
+        }
         try {
             const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${jobId}`, { withCredentials: true });
-            console.log(res.data);
+
             if (res.data.success) {
                 setIsApplied(true); // update the local state
                 const updatedSingleJob = {
@@ -72,7 +77,7 @@ const JobDescription = () => {
                 <Button
                     onClick={isApplied ? null : applyJobHandler}
                     disabled={isApplied}
-                    className={`rounded-lg ${isApplied ? 'bg-gray-600 cursor-not-allowed' : 'bg-[#7209b7] hover:bg-[#5f32ad]'}`}>
+                    className={`rounded-lg cursor-pointer ${isApplied ? 'bg-gray-600 cursor-not-allowed text-amber-50' : 'text-white bg-[#7209b7] hover:bg-[#4813a4]'}`}>
                     {isApplied ? 'Already Applied' : 'Apply Now'}
                 </Button>
             </div>
@@ -81,7 +86,7 @@ const JobDescription = () => {
                 <h1 className='font-bold my-1'>Role: <span className='pl-4 font-normal text-gray-800'>{singleJob?.title}</span></h1>
                 <h1 className='font-bold my-1'>Location: <span className='pl-4 font-normal text-gray-800'>{singleJob?.location}</span></h1>
                 <h1 className='font-bold my-1'>Description: <span className='pl-4 font-normal text-gray-800'>{singleJob?.description}</span></h1>
-                <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experience} yrs</span></h1>
+                <h1 className='font-bold my-1'>Experience: <span className='pl-4 font-normal text-gray-800'>{singleJob?.experienceLevel} yrs</span></h1>
                 <h1 className='font-bold my-1'>Salary: <span className='pl-4 font-normal text-gray-800'>{singleJob?.salary} LPA</span></h1>
                 <h1 className='font-bold my-1'>Total Applicants: <span className='pl-4 font-normal text-gray-800'>{singleJob?.applications?.length}</span></h1>
                 <h1 className='font-bold my-1'>Posted Date: <span className='pl-4 font-normal text-gray-800'>{singleJob?.createdAt.split("T")[0]}</span></h1>

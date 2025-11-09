@@ -73,9 +73,9 @@ export const getAppliedJobs = async (req, res) => {
             }
         });
         if (applications.length===0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No applications found!",
-                success: false
+                success: true
             });
         }
 
@@ -87,7 +87,7 @@ export const getAppliedJobs = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(400).json({
+        return res.status(500).json({
             message: "Error in getAppliedJobs controller!",
             success: false
         });
